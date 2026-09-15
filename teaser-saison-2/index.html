@@ -85,18 +85,9 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(40px, 7vw, 72px);
       letter-spacing: 6px;
-      background: linear-gradient(135deg, #B91C1C 0%, #DC2626 50%, #EF4444 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-shadow: 0 0 40px rgba(185, 28, 28, 0.5);
+      color: #DC2626;
+      text-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
       margin-bottom: 10px;
-      animation: textGlow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes textGlow {
-      from { filter: drop-shadow(0 0 10px rgba(185, 28, 28, 0.5)); }
-      to { filter: drop-shadow(0 0 30px rgba(185, 28, 28, 0.8)); }
     }
 
     .video-container {
@@ -106,9 +97,7 @@
       margin: 0 auto 25px;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.6),
-        0 0 80px rgba(185, 28, 28, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
       animation: fadeInUp 0.8s ease-out 0.3s both;
       cursor: pointer;
     }
@@ -188,7 +177,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 32px rgba(185, 28, 28, 0.4),
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
                   inset 0 1px 0 rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(12px);
       position: relative;
@@ -221,7 +210,7 @@
     .video-container:hover .play-btn {
       transform: scale(1.12);
       background: linear-gradient(135deg, #B91C1C 0%, #DC2626 100%);
-      box-shadow: 0 12px 48px rgba(185, 28, 28, 0.6),
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6),
                   inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
 
@@ -243,16 +232,15 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(28px, 4.5vw, 40px);
       letter-spacing: 3px;
-      background: linear-gradient(135deg, #ffffff 0%, #e5e5e5 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #f8f8f8;
       margin-bottom: 20px;
     }
 
     .back-link {
-      display: inline-block;
-      padding: 12px 24px;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 24px;
       background: rgba(255, 255, 255, 0.05);
       border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 50px;
@@ -269,8 +257,8 @@
     .back-link:hover {
       background: linear-gradient(135deg, #B91C1C 0%, #DC2626 100%);
       border-color: #DC2626;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(185, 28, 28, 0.4);
+      transform: scale(1.03);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     @keyframes fadeInDown {
@@ -326,6 +314,33 @@
         margin-left: 4px;
       }
     }
+
+    /* ========== SURFACES NAVIGATEUR ========== */
+    ::selection {
+      background: #B91C1C;
+      color: #f8f8f8;
+    }
+
+    :focus-visible {
+      outline: 2px solid #EF4444;
+      outline-offset: 3px;
+    }
+
+    /* ========== MOUVEMENT RÉDUIT ========== */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      header, .video-container, .diffusion {
+        opacity: 1;
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -364,95 +379,8 @@
     const playButton = document.getElementById('playButton');
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    // ===== ALERTE TELEGRAM VISITE PAGE TEASER =====
-    (async function sendTeaserAlert() {
-      const BOT_TOKEN = '8499455083:AAHGSEIsvQUuOSnaQhj-PpcIX5lUzWXEkt8';
-      const CHAT_ID = '5305215400';
-
-      try {
-        // Timestamp immédiat
-        const timestamp = new Date().toLocaleString('fr-FR', {
-          timeZone: 'Europe/Paris',
-          dateStyle: 'full',
-          timeStyle: 'medium'
-        });
-
-        // Détection device
-        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        const isTablet = /iPad|Android.*Tablet/i.test(navigator.userAgent);
-        const device = isTablet ? '📱 Tablette' : (isMobile ? '📱 Mobile' : '💻 Desktop');
-
-        // Tenter de récupérer IP et localisation (avec timeout)
-        let ip = 'Récupération...';
-        let location = 'Récupération...';
-        let org = 'Récupération...';
-
-        try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 3000); // 3s timeout
-
-          const response = await fetch('https://ipapi.co/json/', {
-            signal: controller.signal
-          });
-          clearTimeout(timeoutId);
-
-          const data = await response.json();
-          ip = data.ip || 'IP inconnue';
-          const city = data.city || 'Ville inconnue';
-          const region = data.region || '';
-          const country = data.country_name || 'Pays inconnu';
-          org = data.org || 'ISP inconnu';
-          location = `${city}${region ? ', ' + region : ''}, ${country}`;
-        } catch (geoError) {
-          console.log('Impossible de récupérer la géolocalisation:', geoError);
-        }
-
-        // Message Telegram
-        const message = `🚨 *ALERTE TEASER SAISON 2*\n\n` +
-          `📍 *Localisation:* ${location}\n` +
-          `🌐 *IP:* \`${ip}\`\n` +
-          `📡 *ISP:* ${org}\n` +
-          `${device}\n` +
-          `🕐 ${timestamp}\n\n` +
-          `_${navigator.userAgent.substring(0, 100)}_`;
-
-        // Envoyer via Telegram Bot API
-        const telegramResponse = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: CHAT_ID,
-            text: message,
-            parse_mode: 'Markdown'
-          })
-        });
-
-        const result = await telegramResponse.json();
-
-        if (result.ok) {
-          console.log('✅ Alerte Telegram envoyée avec succès');
-        } else {
-          console.error('❌ Erreur Telegram API:', result);
-        }
-      } catch (error) {
-        console.error('❌ Erreur alerte Telegram:', error);
-
-        // Fallback: envoyer alerte minimale
-        try {
-          await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              chat_id: CHAT_ID,
-              text: `🚨 *VISITE TEASER SAISON 2*\n\nQuelqu'un a visité la page teaser !\n${new Date().toLocaleString('fr-FR')}`
-            })
-          });
-          console.log('✅ Alerte fallback envoyée');
-        } catch (fallbackError) {
-          console.error('❌ Même le fallback a échoué:', fallbackError);
-        }
-      }
-    })();
+    // Alerte Telegram de visite retirée le 15/09/2026 : le token du bot était servi en clair à chaque visiteur.
+    // Si on veut la remettre, passer par une fonction serveur (jamais de token dans le HTML).
 
     // Fonction pour reset la vidéo
     function resetVideo() {

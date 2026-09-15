@@ -8,8 +8,7 @@
   <meta http-equiv="Expires" content="0">
 
   <!-- Security Headers -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://xhpsdbmajanmoztijbnx.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://xhpsdbmajanmoztijbnx.supabase.co;">
-  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://xhpsdbmajanmoztijbnx.supabase.co https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; base-uri 'self'; form-action 'self' https://xhpsdbmajanmoztijbnx.supabase.co;">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()")
@@ -174,6 +173,8 @@
       --black-light: #141414;
       --white: #f8f8f8;
       --gray: #888;
+      /* Rouge réservé au TEXTE sur fond noir (5.3:1 AA) — les surfaces gardent --red / --red-light */
+      --red-text: #EF4444;
     }
 
     * {
@@ -253,7 +254,10 @@
     .header-cta {
       position: absolute;
       right: 30px;
-      padding: 12px 28px;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      padding: 10px 28px;
       background: var(--red);
       color: var(--white);
       text-decoration: none;
@@ -293,12 +297,12 @@
     .header.scrolled .header-cta {
       opacity: 1;
       transform: translateX(0);
-      box-shadow: 0 4px 20px rgba(185, 28, 28, 0.5);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
     }
 
     .header.scrolled .header-cta:hover {
       background: var(--red-light);
-      box-shadow: 0 4px 20px rgba(185, 28, 28, 0.55);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
     .header-cta:hover::before {
@@ -642,7 +646,7 @@
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      text-shadow: 0 0 40px rgba(0,0,0,0.8);
+      text-shadow: 0 4px 40px rgba(0,0,0,0.8);
     }
 
     .hero-video-text.visible {
@@ -652,13 +656,7 @@
 
     .hero-video-text span {
       color: var(--red);
-      text-shadow: 0 0 30px rgba(185, 28, 28, 0.6), 0 0 60px rgba(185, 28, 28, 0.3);
-      animation: heroTextGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes heroTextGlow {
-      0%, 100% { text-shadow: 0 0 30px rgba(185, 28, 28, 0.6), 0 0 60px rgba(185, 28, 28, 0.3); }
-      50% { text-shadow: 0 0 50px rgba(185, 28, 28, 0.9), 0 0 100px rgba(185, 28, 28, 0.5); }
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
     }
 
     .hero-video-sub {
@@ -812,7 +810,7 @@
     }
 
     .hero-tagline strong {
-      color: var(--red-light);
+      color: var(--red-text);
       font-weight: 600;
     }
 
@@ -831,7 +829,7 @@
     }
 
     .hero-afdas strong {
-      color: var(--red-light);
+      color: var(--red-text);
       font-weight: 700;
     }
 
@@ -849,9 +847,9 @@
       letter-spacing: 2px;
       border: none;
       cursor: pointer;
+      min-height: 48px;
       transition: all 0.4s ease;
-      box-shadow: 0 4px 25px rgba(185, 28, 28, 0.5);
-      animation: pulse 2s ease-in-out infinite;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
       position: relative;
       overflow: hidden;
     }
@@ -878,15 +876,10 @@
       50%, 100% { left: 100%; }
     }
 
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 4px 25px rgba(185, 28, 28, 0.5); }
-      50% { box-shadow: 0 4px 40px rgba(185, 28, 28, 0.8), 0 0 60px rgba(185, 28, 28, 0.4); }
-    }
-
     .cta-button:hover {
       background: var(--red-light);
       transform: scale(1.03);
-      box-shadow: 0 10px 40px rgba(185, 28, 28, 0.6);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
     }
 
     .cta-button:hover::before {
@@ -1024,7 +1017,7 @@
       opacity: 0;
       transform: translateY(50px) scale(0.95);
       transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-      text-shadow: 0 0 40px rgba(255,255,255,0.1);
+      text-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
     }
 
     .section-title.visible {
@@ -1046,13 +1039,7 @@
 
     .section-title span {
       color: var(--red);
-      text-shadow: 0 0 30px rgba(185, 28, 28, 0.6);
-      animation: titleGlow 3s ease-in-out infinite;
-    }
-
-    @keyframes titleGlow {
-      0%, 100% { text-shadow: 0 0 30px rgba(185, 28, 28, 0.6); }
-      50% { text-shadow: 0 0 50px rgba(185, 28, 28, 0.9), 0 0 80px rgba(185, 28, 28, 0.4); }
+      text-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
     }
 
     
@@ -1226,7 +1213,7 @@
       margin: 0 auto 15px;
       overflow: hidden;
       border: 4px solid rgba(255,255,255,0.1);
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     }
 
@@ -1255,7 +1242,7 @@
     .team-member:hover .team-photo {
       transform: rotate(0deg) scale(1.15) translateY(-8px);
       border-color: var(--red);
-      box-shadow: 0 15px 40px rgba(185, 28, 28, 0.4), 0 0 30px rgba(185, 28, 28, 0.2);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
     }
 
     .team-member:hover .team-photo img {
@@ -1272,29 +1259,23 @@
     }
 
     .team-member:hover .team-name {
-      color: var(--red);
+      color: var(--red-text);
       transform: scale(1.05);
     }
 
     .team-role {
-      font-size: 11px;
-      color: var(--red);
+      font-size: 12px;
+      color: var(--red-text);
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 6px;
-      opacity: 0.8;
-      transition: all 0.3s ease;
-    }
-
-    .team-member:hover .team-role {
-      opacity: 1;
     }
 
     .team-desc {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--gray);
       line-height: 1.4;
-      max-width: 140px;
+      max-width: 150px;
       margin: 0 auto;
     }
 
@@ -1340,7 +1321,7 @@
       margin-bottom: 15px;
       opacity: 0;
       transform: translateY(20px) scale(0.8);
-      animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.5s;
+      animation: popUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
     }
 
     .form-success p {
@@ -1473,8 +1454,7 @@
 
     .faq-item {
       background: linear-gradient(135deg, rgba(20,20,20,0.8) 0%, rgba(15,15,15,0.9) 100%);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-left: 3px solid var(--red);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 8px;
       padding: 0;
       overflow: hidden;
@@ -1482,21 +1462,25 @@
     }
 
     .faq-item:hover {
-      border-color: rgba(255,255,255,0.1);
-      border-left-color: var(--red-light);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3), 0 0 20px rgba(185, 28, 28, 0.1);
-      transform: translateX(5px);
+      border-color: rgba(220, 38, 38, 0.45);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     }
 
     .faq-item.open {
-      border-left-color: var(--red-light);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3), 0 0 30px rgba(185, 28, 28, 0.15);
+      border-color: rgba(220, 38, 38, 0.6);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
     }
 
     .faq-question {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 16px;
+      width: 100%;
+      background: none;
+      border: 0;
+      font-family: inherit;
+      text-align: left;
       cursor: pointer;
       font-size: 17px;
       font-weight: 500;
@@ -1506,7 +1490,7 @@
     }
 
     .faq-question:hover {
-      color: var(--red-light);
+      color: var(--red-text);
     }
 
     .faq-icon {
@@ -1525,7 +1509,6 @@
     .faq-item.open .faq-icon {
       transform: rotate(45deg);
       color: var(--red-light);
-      text-shadow: 0 0 20px rgba(185, 28, 28, 0.8);
     }
 
     .faq-answer {
@@ -1538,7 +1521,7 @@
     }
 
     .faq-item.open .faq-answer {
-      max-height: 200px;
+      max-height: 400px;
       padding: 0 30px 25px 30px;
     }
 
@@ -1656,7 +1639,7 @@
     }
 
     .form-socialproof strong {
-      color: var(--red-light);
+      color: var(--red-text);
       font-weight: 700;
     }
 
@@ -1716,27 +1699,15 @@
 
     /* Validation custom - glow pulse */
     .form-input.invalid {
-      color: var(--red) !important;
+      color: var(--red-text) !important;
     }
     .form-input.invalid::placeholder {
-      color: var(--red);
-      opacity: 0.7;
+      color: var(--red-text);
+      opacity: 0.85;
     }
     .form-input.invalid ~ .input-line {
       width: 100%;
-      background: var(--red);
-      box-shadow: 0 0 15px var(--red), 0 0 30px rgba(196, 30, 58, 0.3);
-      animation: glow-pulse 1.5s ease-in-out infinite;
-    }
-    @keyframes glow-pulse {
-      0%, 100% {
-        box-shadow: 0 0 10px var(--red), 0 0 20px rgba(196, 30, 58, 0.2);
-        opacity: 1;
-      }
-      50% {
-        box-shadow: 0 0 20px var(--red), 0 0 40px rgba(196, 30, 58, 0.4);
-        opacity: 0.8;
-      }
+      background: var(--red-text);
     }
 
     .form-textarea {
@@ -1749,15 +1720,33 @@
     }
 
     .custom-checkbox {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 15px;
-      margin-bottom: 15px;
+      min-height: 44px;
+      margin-bottom: 4px;
       cursor: pointer;
     }
 
+    /* Case native masquée visuellement mais toujours focusable au clavier */
     .custom-checkbox input {
-      display: none;
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .custom-checkbox input:focus-visible ~ .checkmark {
+      outline: 2px solid var(--red-text);
+      outline-offset: 3px;
     }
 
     .checkmark {
@@ -1816,12 +1805,12 @@
       cursor: pointer;
       transition: all 0.4s ease;
       margin-top: 20px;
-      box-shadow: 0 8px 30px rgba(220, 38, 38, 0.45), 0 0 0 1px rgba(255,255,255,0.06);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255,255,255,0.06);
     }
 
     .submit-btn:hover {
       background: linear-gradient(135deg, #ef3b3b 0%, var(--red-light) 100%);
-      box-shadow: 0 12px 40px rgba(220, 38, 38, 0.65), 0 0 0 1px rgba(255,255,255,0.1);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.1);
       transform: scale(1.02);
     }
 
@@ -1841,7 +1830,7 @@
     }
 
     .form-note strong {
-      color: var(--red-light);
+      color: var(--red-text);
     }
 
     /* Footer */
@@ -1883,12 +1872,7 @@
       color: var(--white);
       text-decoration: none;
       transition: all 0.3s ease;
-      outline: none;
       position: relative;
-    }
-
-    .social-btn:focus {
-      outline: none;
     }
 
     .social-btn svg {
@@ -1921,8 +1905,8 @@
       }
 
       .social-btn {
-        width: 40px;
-        height: 40px;
+        width: 44px;
+        height: 44px;
       }
 
       .social-btn svg {
@@ -1934,12 +1918,14 @@
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      gap: 18px;
       flex-wrap: wrap;
-      margin-bottom: 30px;
+      margin-bottom: 18px;
     }
 
     .footer-links a {
+      display: inline-block;
+      padding: 15px 6px;
       font-size: 12px;
       color: var(--gray);
       text-decoration: none;
@@ -1972,7 +1958,7 @@
       display: inline-block;
       background: var(--red);
       color: white;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 2px;
       padding: 6px 16px;
@@ -2101,7 +2087,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 8px 32px rgba(185, 28, 28, 0.4),
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5),
                   inset 0 1px 0 rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(12px);
       position: relative;
@@ -2134,7 +2120,7 @@
     .gallery-main:hover .play-btn {
       transform: scale(1.12);
       background: linear-gradient(135deg, #B91C1C 0%, #DC2626 100%);
-      box-shadow: 0 12px 48px rgba(185, 28, 28, 0.6),
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6),
                   inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
 
@@ -2219,8 +2205,7 @@
       border-color: rgba(220, 38, 38, 0.8);
       transform: scale(1.12);
       box-shadow:
-        0 0 0 4px rgba(220, 38, 38, 0.15),
-        0 0 32px rgba(220, 38, 38, 0.4),
+        0 8px 24px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
       opacity: 1;
     }
@@ -2242,18 +2227,27 @@
     }
 
     .carousel-dot {
+      position: relative;
       width: 8px;
       height: 8px;
+      padding: 0;
+      border: 0;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.4);
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
+    /* Zone tactile 44px autour du point de 8px */
+    .carousel-dot::before {
+      content: '';
+      position: absolute;
+      inset: -18px;
+    }
+
     .carousel-dot.active {
       background: var(--red);
       transform: scale(1.4);
-      box-shadow: 0 0 8px rgba(220, 38, 38, 0.6);
     }
 
     .carousel-dot:hover {
@@ -2369,6 +2363,7 @@
       font-size: 18px;
       letter-spacing: 2px;
       padding: 14px 35px;
+      min-height: 48px;
       border-radius: 6px;
       text-decoration: none;
       transition: all 0.3s ease;
@@ -2428,8 +2423,8 @@
       position: absolute;
       top: -50px;
       right: 0;
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       background: transparent;
       border: 2px solid rgba(255,255,255,0.3);
       border-radius: 50%;
@@ -2580,7 +2575,7 @@
         color: white;
         padding: 10px 20px;
         border-radius: 24px;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 500;
         letter-spacing: 0.3px;
         text-transform: uppercase;
@@ -2624,12 +2619,12 @@
       }
 
       .team-role, .team-desc {
-        font-size: 11px;
+        font-size: 12px;
       }
 
       .footer-links {
         flex-direction: column;
-        gap: 15px;
+        gap: 0;
       }
 
       .faq-question {
@@ -2652,7 +2647,7 @@
       }
 
       .season-header .season-badge {
-        font-size: 10px;
+        font-size: 12px;
         padding: 5px 12px;
       }
 
@@ -2665,7 +2660,7 @@
       }
 
       .hero-video-sub {
-        font-size: 11px;
+        font-size: 12px;
       }
 
       /* Header mobile */
@@ -2690,8 +2685,8 @@
 
       .header-cta {
         right: 15px;
-        padding: 10px 18px;
-        font-size: 11px;
+        padding: 8px 16px;
+        font-size: 12px;
       }
 
       /* Désactiver effets lourds sur mobile */
@@ -2731,7 +2726,7 @@
       }
 
       .team-desc {
-        font-size: 10px;
+        font-size: 12px;
       }
 
       .gallery-side {
@@ -2761,10 +2756,7 @@
       font-size: 1.5em;
       font-weight: 900;
       margin-bottom: 8px;
-      background: linear-gradient(135deg, var(--red) 0%, var(--red-light) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--red-light);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
@@ -2789,11 +2781,6 @@
     .intermittent-info.visible .hours-conversion {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    @keyframes shine {
-      0%, 100% { opacity: 0; transform: translateX(-100%); }
-      50% { opacity: 1; transform: translateX(100%); }
     }
 
     .hours-display {
@@ -2829,22 +2816,12 @@
       color: var(--red-light);
       line-height: 1;
       display: block;
-      text-shadow: 0 0 20px rgba(185, 28, 28, 0.6);
-      animation: glow 2s ease-in-out infinite;
-    }
-
-    @keyframes glow {
-      0%, 100% {
-        text-shadow: 0 0 20px rgba(185, 28, 28, 0.6);
-      }
-      50% {
-        text-shadow: 0 0 30px rgba(185, 28, 28, 0.9), 0 0 40px rgba(185, 28, 28, 0.5);
-      }
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     }
 
     .hours-label {
-      font-size: 0.7em;
-      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-top: 4px;
@@ -2898,7 +2875,7 @@
       width: 0;
       transition: width 2.5s cubic-bezier(0.65, 0, 0.35, 1) 1s;
       position: relative;
-      box-shadow: 0 0 20px rgba(185, 28, 28, 0.7), inset 0 1px 0 rgba(255,255,255,0.2);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
     }
 
     .progress-bar::after {
@@ -2923,7 +2900,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       font-weight: 700;
-      font-size: 0.75em;
+      font-size: 12px;
       color: white;
       text-shadow: 0 1px 4px rgba(0,0,0,0.8);
       letter-spacing: 0.5px;
@@ -2931,8 +2908,8 @@
 
     .progress-info {
       margin-top: 12px;
-      font-size: 0.75em;
-      color: rgba(255,255,255,0.4);
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
       font-style: italic;
     }
 
@@ -2955,7 +2932,7 @@
       }
 
       .hours-label {
-        font-size: 0.65em;
+        font-size: 12px;
       }
 
       .hours-display {
@@ -2972,12 +2949,72 @@
       }
 
       .progress-text {
-        font-size: 0.7em;
+        font-size: 12px;
       }
 
       .progress-info {
-        font-size: 0.72em;
+        font-size: 12px;
         margin-top: 10px;
+      }
+    }
+
+    /* ========== SURFACES NAVIGATEUR ========== */
+    ::selection {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--red-text);
+      outline-offset: 3px;
+    }
+
+    .form-input:focus-visible,
+    .form-textarea:focus-visible {
+      outline: none; /* la ligne rouge .input-line sert d'indicateur de focus */
+    }
+
+    /* ========== MOUVEMENT RÉDUIT ========== */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      /* Les éléments révélés par animation restent visibles à l'état final */
+      .logo-letter,
+      .logo-tagline,
+      .form-success h3,
+      .form-success p,
+      .form-success .subtext,
+      .hours-arrow {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .marquee-track {
+        animation: none !important;
+        -webkit-animation: none !important;
+      }
+
+      .hero-video-overlay::before,
+      .cta-button::before,
+      .header-cta::before,
+      .progress-bar::after {
+        animation: none !important;
+      }
+
+      .gallery-main.playing::after {
+        opacity: 0.95 !important;
+        animation: none !important;
       }
     }
   </style>
@@ -2991,7 +3028,7 @@
   <!-- Loading Screen -->
   <div class="loader" id="loader">
     <div class="loader-logo" id="loaderLogo">
-      <div class="logo-animated loader-version" aria-label="Court ou Crève">
+      <div class="logo-animated loader-version" role="img" aria-label="Court ou Crève">
         <div class="logo-row court">
           <img src="logo-letters/Courtoucreve_Site_Logo_Lettre-01.svg" alt="" class="logo-letter" data-group="court" data-delay="0">
           <img src="logo-letters/Courtoucreve_Site_Logo_Lettre-02.svg" alt="" class="logo-letter" data-group="court" data-delay="50">
@@ -3016,8 +3053,8 @@
 
   <!-- Header -->
   <header class="header" id="header">
-    <a href="#" class="header-logo-link">
-      <div class="logo-animated header-version">
+    <a href="#" class="header-logo-link" aria-label="Court ou Crève — retour en haut de page">
+      <div class="logo-animated header-version" role="img" aria-label="Court ou Crève">
         <div class="logo-row court">
           <img src="logo-letters/Courtoucreve_Site_Logo_Lettre-01.svg" alt="" class="logo-letter visible">
           <img src="logo-letters/Courtoucreve_Site_Logo_Lettre-02.svg" alt="" class="logo-letter visible">
@@ -3043,7 +3080,7 @@
   </header>
 
   <!-- Main Content -->
-  <div class="main-content" id="mainContent">
+  <main class="main-content" id="mainContent">
 
     <!-- Hero Split Screen -->
     <section class="hero" id="hero">
@@ -3051,7 +3088,7 @@
       <div class="hero-left">
         <div class="hero-logo">
           <!-- Logo animé lettre par lettre -->
-          <div class="logo-animated" aria-label="Court ou Crève - Formation réalisation vidéo et court-métrage à Paris">
+          <div class="logo-animated" role="img" aria-label="Court ou Crève - Formation réalisation vidéo et court-métrage à Paris">
             <div class="logo-row court">
               <img src="logo-letters/Courtoucreve_Site_Logo_Lettre-01.svg" alt="" class="logo-letter" data-group="court" data-delay="0">
               <img src="logo-letters/Courtoucreve_Site_Logo_Lettre-02.svg" alt="" class="logo-letter" data-group="court" data-delay="50">
@@ -3113,7 +3150,7 @@
         <div class="gallery-carousel-wrapper">
           <div class="gallery-carousel">
             <div class="gallery-main active" data-video="video-preview.mp4">
-              <video src="video-preview.mp4" muted loop playsinline preload="auto" poster="video-poster.jpg">
+              <video src="video-preview.mp4" muted loop playsinline preload="metadata" poster="video-poster.jpg">
                 <source src="video-preview.mp4" type="video/mp4">
               </video>
               <!-- Poster séparé pour control mobile/desktop -->
@@ -3127,7 +3164,7 @@
             </div>
 
             <div class="gallery-main" data-video="video3.mp4">
-              <video src="video3.mp4" muted loop playsinline preload="auto" poster="video3-poster.jpg?v=2">
+              <video src="video3.mp4" muted loop playsinline preload="metadata" poster="video3-poster.jpg?v=2">
                 <source src="video3.mp4" type="video/mp4">
               </video>
               <picture class="video-poster-img">
@@ -3154,20 +3191,20 @@
 
           <!-- Dots indicator -->
           <div class="carousel-dots">
-            <div class="carousel-dot active" data-index="0"></div>
-            <div class="carousel-dot" data-index="1"></div>
+            <button type="button" class="carousel-dot active" data-index="0" aria-label="Vidéo 1"></button>
+            <button type="button" class="carousel-dot" data-index="1" aria-label="Vidéo 2"></button>
           </div>
         </div>
 
         <div class="gallery-side">
           <div class="gallery-thumb active">
-            <img src="gallery/pierre-gagnant.jpg?v=10" alt="Pierre, vainqueur Court ou Crève Saison 1 avec son trophée" style="object-position: top;">
+            <img src="gallery/pierre-gagnant.jpg?v=10" width="533" height="800" loading="lazy" decoding="async" alt="Pierre, vainqueur Court ou Crève Saison 1 avec son trophée" style="object-position: top;">
           </div>
           <div class="gallery-thumb">
-            <img src="gallery/projection-cinema-court-ou-creve-public-gala.jpg?v=10" alt="Public lors de la projection des courts-métrages au cinéma">
+            <img src="gallery/projection-cinema-court-ou-creve-public-gala.jpg?v=10" width="1200" height="800" loading="lazy" decoding="async" alt="Public lors de la projection des courts-métrages au cinéma">
           </div>
           <div class="gallery-thumb">
-            <img src="gallery/groupe-saison1.jpg?v=10" alt="Tous les participants Court ou Crève Saison 1" style="object-position: center 35%; transform: scale(1.15);">
+            <img src="gallery/groupe-saison1.jpg?v=10" width="800" height="533" loading="lazy" decoding="async" alt="Tous les participants Court ou Crève Saison 1" style="object-position: center 35%; transform: scale(1.15);">
           </div>
         </div>
       </div>
@@ -3175,23 +3212,23 @@
       <!-- Bandeau photos défilant -->
       <div class="photos-marquee">
         <div class="marquee-track">
-          <img src="gallery/saison1/court-ou-creve-masterclass-1.jpg" alt="Court ou Crève - Masterclass formation réalisation vidéo Paris">
-          <img src="gallery/saison1/court-ou-creve-masterclass-2.jpg" alt="Court ou Crève - Masterclass court-métrage ambiance">
-          <img src="gallery/saison1/court-ou-creve-masterclass-3.jpg" alt="Court ou Crève - Masterclass formation audiovisuelle">
-          <img src="gallery/saison1/court-ou-creve-formateur-1.jpg" alt="Court ou Crève - Formateur production vidéo">
-          <img src="gallery/saison1/court-ou-creve-formateur-2.jpg" alt="Court ou Crève - Formateur écriture scénario">
-          <img src="gallery/saison1/court-ou-creve-formateur-3.jpg" alt="Court ou Crève - Formateur technique cinéma">
-          <img src="gallery/saison1/court-ou-creve-projection-1.jpg" alt="Court ou Crève - Projection cinéma Saison 1">
-          <img src="gallery/saison1/court-ou-creve-projection-2.jpg" alt="Court ou Crève - Projection courts-métrages gala">
+          <img src="gallery/saison1/court-ou-creve-masterclass-1.jpg" width="800" height="533" decoding="async" alt="Court ou Crève - Masterclass formation réalisation vidéo Paris">
+          <img src="gallery/saison1/court-ou-creve-masterclass-2.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Masterclass court-métrage ambiance">
+          <img src="gallery/saison1/court-ou-creve-masterclass-3.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Masterclass formation audiovisuelle">
+          <img src="gallery/saison1/court-ou-creve-formateur-1.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Formateur production vidéo">
+          <img src="gallery/saison1/court-ou-creve-formateur-2.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Formateur écriture scénario">
+          <img src="gallery/saison1/court-ou-creve-formateur-3.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Formateur technique cinéma">
+          <img src="gallery/saison1/court-ou-creve-projection-1.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Projection cinéma Saison 1">
+          <img src="gallery/saison1/court-ou-creve-projection-2.jpg" width="800" height="533" decoding="async" alt="Court ou Crève - Projection courts-métrages gala">
           <!-- Duplicate for seamless loop -->
-          <img src="gallery/saison1/court-ou-creve-masterclass-1.jpg" alt="Court ou Crève - Masterclass formation réalisation vidéo Paris">
-          <img src="gallery/saison1/court-ou-creve-masterclass-2.jpg" alt="Court ou Crève - Masterclass court-métrage ambiance">
-          <img src="gallery/saison1/court-ou-creve-masterclass-3.jpg" alt="Court ou Crève - Masterclass formation audiovisuelle">
-          <img src="gallery/saison1/court-ou-creve-formateur-1.jpg" alt="Court ou Crève - Formateur production vidéo">
-          <img src="gallery/saison1/court-ou-creve-formateur-2.jpg" alt="Court ou Crève - Formateur écriture scénario">
-          <img src="gallery/saison1/court-ou-creve-formateur-3.jpg" alt="Court ou Crève - Formateur technique cinéma">
-          <img src="gallery/saison1/court-ou-creve-projection-1.jpg" alt="Court ou Crève - Projection cinéma Saison 1">
-          <img src="gallery/saison1/court-ou-creve-projection-2.jpg" alt="Court ou Crève - Projection courts-métrages gala">
+          <img src="gallery/saison1/court-ou-creve-masterclass-1.jpg" width="800" height="533" decoding="async" alt="Court ou Crève - Masterclass formation réalisation vidéo Paris">
+          <img src="gallery/saison1/court-ou-creve-masterclass-2.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Masterclass court-métrage ambiance">
+          <img src="gallery/saison1/court-ou-creve-masterclass-3.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Masterclass formation audiovisuelle">
+          <img src="gallery/saison1/court-ou-creve-formateur-1.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Formateur production vidéo">
+          <img src="gallery/saison1/court-ou-creve-formateur-2.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Formateur écriture scénario">
+          <img src="gallery/saison1/court-ou-creve-formateur-3.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Formateur technique cinéma">
+          <img src="gallery/saison1/court-ou-creve-projection-1.jpg" width="533" height="800" decoding="async" alt="Court ou Crève - Projection cinéma Saison 1">
+          <img src="gallery/saison1/court-ou-creve-projection-2.jpg" width="800" height="533" decoding="async" alt="Court ou Crève - Projection courts-métrages gala">
         </div>
       </div>
 
@@ -3221,7 +3258,7 @@
       <div class="team-grid">
         <div class="team-member">
           <div class="team-photo">
-            <img src="team/court-ou-creve-ludovik-formateur-production.jpg" alt="Court ou Crève - Ludovik formateur production vidéo">
+            <img src="team/court-ou-creve-ludovik-formateur-production.jpg" width="396" height="400" loading="lazy" decoding="async" alt="Court ou Crève - Ludovik formateur production vidéo">
           </div>
           <h3 class="team-name">Ludovik</h3>
           <p class="team-role">Production</p>
@@ -3230,7 +3267,7 @@
 
         <div class="team-member">
           <div class="team-photo guillaume">
-            <img src="team/court-ou-creve-guillaume-formateur-reseaux.jpg" alt="Court ou Crève - Guillaume formateur réseaux sociaux">
+            <img src="team/court-ou-creve-guillaume-formateur-reseaux.jpg" width="400" height="379" loading="lazy" decoding="async" alt="Court ou Crève - Guillaume formateur réseaux sociaux">
           </div>
           <h3 class="team-name">Guillaume</h3>
           <p class="team-role">Réseaux</p>
@@ -3239,7 +3276,7 @@
 
         <div class="team-member">
           <div class="team-photo">
-            <img src="team/court-ou-creve-kemar-formateur-jeu-acteur.jpg" alt="Court ou Crève - Kemar formateur jeu d'acteur">
+            <img src="team/court-ou-creve-kemar-formateur-jeu-acteur.jpg" width="400" height="376" loading="lazy" decoding="async" alt="Court ou Crève - Kemar formateur jeu d'acteur">
           </div>
           <h3 class="team-name">Kemar</h3>
           <p class="team-role">Jeu</p>
@@ -3248,7 +3285,7 @@
 
         <div class="team-member">
           <div class="team-photo">
-            <img src="team/court-ou-creve-babor-formateur-scenario.jpg" alt="Court ou Crève - Babor formateur écriture scénario">
+            <img src="team/court-ou-creve-babor-formateur-scenario.jpg" width="400" height="395" loading="lazy" decoding="async" alt="Court ou Crève - Babor formateur écriture scénario">
           </div>
           <h3 class="team-name">Babor</h3>
           <p class="team-role">Écriture</p>
@@ -3257,7 +3294,7 @@
 
         <div class="team-member">
           <div class="team-photo pierre">
-            <img src="team/court-ou-creve-pierre-createur.jpg" alt="Court ou Crève - Pierre créateur de la formation">
+            <img src="team/court-ou-creve-pierre-createur.jpg" width="397" height="400" loading="lazy" decoding="async" alt="Court ou Crève - Pierre créateur de la formation">
           </div>
           <h3 class="team-name">Pierre</h3>
           <p class="team-role">Créateur</p>
@@ -3266,7 +3303,7 @@
 
         <div class="team-member">
           <div class="team-photo ludoc">
-            <img src="team/court-ou-creve-ludoc-formateur-technique.jpg" alt="Court ou Crève - Ludoc formateur technique vidéo">
+            <img src="team/court-ou-creve-ludoc-formateur-technique.jpg" width="379" height="400" loading="lazy" decoding="async" alt="Court ou Crève - Ludoc formateur technique vidéo">
           </div>
           <h3 class="team-name">Ludoc</h3>
           <p class="team-role">Technique</p>
@@ -3275,7 +3312,7 @@
 
         <div class="team-member">
           <div class="team-photo jr">
-            <img src="team/court-ou-creve-jhon-rachid-acteur.jpg" alt="Court ou Crève - Jhon Rachid acteur et coach">
+            <img src="team/court-ou-creve-jhon-rachid-acteur.jpg" width="400" height="393" loading="lazy" decoding="async" alt="Court ou Crève - Jhon Rachid acteur et coach">
           </div>
           <h3 class="team-name">Jhon Rachid</h3>
           <p class="team-role">Acteur</p>
@@ -3290,60 +3327,60 @@
 
       <div class="faq-list">
         <div class="faq-item">
-          <div class="faq-question">
+          <button type="button" class="faq-question">
             Qui peut participer à l'aventure ?
-            <span class="faq-icon">+</span>
-          </div>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
           <div class="faq-answer">
             Toute personne passionnée par la création vidéo, que tu sois débutant ou que tu aies déjà de l'expérience. L'important c'est la motivation et l'envie d'apprendre.
           </div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-question">
+          <button type="button" class="faq-question">
             Combien de temps ça dure ?
-            <span class="faq-icon">+</span>
-          </div>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
           <div class="faq-answer">
             La formation se déroule sur 2 semaines intensives à Paris. De l'écriture au montage, jusqu'à la projection finale au cinéma.
           </div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-question">
+          <button type="button" class="faq-question">
             Suis-je éligible au financement AFDAS ?
-            <span class="faq-icon">+</span>
-          </div>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
           <div class="faq-answer">
             Si tu es intermittent du spectacle, tu peux bénéficier d'un financement AFDAS. Contacte-nous pour qu'on t'aide dans tes démarches.
           </div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-question">
+          <button type="button" class="faq-question">
             C'est ouvert à toute la France ?
-            <span class="faq-icon">+</span>
-          </div>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
           <div class="faq-answer">
             Oui ! Les sessions se déroulent à Paris, mais on accueille des participants de toute la France.
           </div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-question">
+          <button type="button" class="faq-question">
             Je suis nul en réseaux sociaux, c'est grave ?
-            <span class="faq-icon">+</span>
-          </div>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
           <div class="faq-answer">
             Pas du tout ! On est là pour t'apprendre. Tu repartiras avec toutes les clés pour maîtriser le format court et les réseaux.
           </div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-question">
+          <button type="button" class="faq-question">
             Comment réserver ma place pour la Saison 3 ?
-            <span class="faq-icon">+</span>
-          </div>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
           <div class="faq-answer">
             Laisse ton e-mail dans le formulaire ci-dessous (c'est tout ce qu'il faut). Tu rejoins la file d'attente prioritaire : dès qu'une Saison 3 se monte, on recontacte d'abord ceux qui se sont inscrits — les intermittents en premier. Les places sont limitées.
           </div>
@@ -3395,28 +3432,28 @@
 
         <form class="inscription-form" id="inscriptionForm">
           <!-- Honeypot anti-spam -->
-          <input type="text" name="website" style="display:none !important" tabindex="-1" autocomplete="off">
+          <input type="text" name="website" style="display:none !important" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="form-row">
             <div class="form-group">
-              <input type="text" name="Nom" class="form-input" placeholder="Prénom et Nom" required autocomplete="name">
+              <input type="text" name="Nom" class="form-input" placeholder="Prénom et Nom" aria-label="Prénom et Nom" required autocomplete="name">
               <div class="input-line"></div>
             </div>
           </div>
 
           <div class="form-row two-cols">
             <div class="form-group">
-              <input type="email" name="Email" class="form-input" placeholder="E-mail" required autocomplete="email">
+              <input type="email" name="Email" class="form-input" placeholder="E-mail" aria-label="E-mail" required autocomplete="email">
               <div class="input-line"></div>
             </div>
             <div class="form-group">
-              <input type="tel" name="Téléphone" class="form-input" placeholder="Téléphone (optionnel)" autocomplete="tel">
+              <input type="tel" name="Téléphone" class="form-input" placeholder="Téléphone (optionnel)" aria-label="Téléphone (optionnel)" autocomplete="tel">
               <div class="input-line"></div>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <textarea name="Motivation" class="form-input form-textarea" placeholder="Un mot sur ta motivation (optionnel)"></textarea>
+              <textarea name="Motivation" class="form-input form-textarea" placeholder="Un mot sur ta motivation (optionnel)" aria-label="Un mot sur ta motivation (optionnel)"></textarea>
               <div class="input-line"></div>
             </div>
           </div>
@@ -3424,7 +3461,7 @@
           <!-- Statut intermittent (au moins une option) -->
           <div style="margin-bottom: 8px;">
             <div style="font-size: 13px; color: #999; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
-              Statut <span style="color: #c41e3a;">(au moins une option)</span>
+              Statut <span style="color: var(--red-text);">(au moins une option)</span>
             </div>
             <div class="form-checkboxes">
               <label class="custom-checkbox">
@@ -3456,19 +3493,19 @@
 
           <button type="submit" class="submit-btn">
             <span>Ça part !</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
           </button>
         </form>
 
-        <div class="form-note" style="margin-top: 16px; padding: 16px; background: rgba(196, 30, 58, 0.08); border: 2px solid rgba(196, 30, 58, 0.3); border-radius: 8px; display: flex; gap: 12px; align-items: center;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="flex-shrink: 0;">
-            <circle cx="12" cy="12" r="10" stroke="#c41e3a" stroke-width="2" fill="none"/>
-            <path d="M12 7v6M12 16v.5" stroke="#c41e3a" stroke-width="2" stroke-linecap="round"/>
+        <div class="form-note" style="margin-top: 16px; padding: 16px; background: rgba(185, 28, 28, 0.08); border: 1px solid rgba(220, 38, 38, 0.35); border-radius: 8px; display: flex; gap: 12px; align-items: center;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="flex-shrink: 0;" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="var(--red-light)" stroke-width="2" fill="none"/>
+            <path d="M12 7v6M12 16v.5" stroke="var(--red-light)" stroke-width="2" stroke-linecap="round"/>
           </svg>
           <div style="flex: 1;">
-            <strong style="display: block; margin-bottom: 6px; color: #c41e3a; font-size: 14px;">Places réservées aux intermittents du spectacle</strong>
+            <strong style="display: block; margin-bottom: 6px; color: var(--red-text); font-size: 14px;">Places réservées aux intermittents du spectacle</strong>
             <div style="line-height: 1.5; font-size: 13px;">
               Formation 100% prise en charge par l'AFDAS.<br>
               Non-intermittent ? Viens avec un <strong>pote intermittent</strong> !
@@ -3482,7 +3519,7 @@
             <svg viewBox="0 0 100 80" class="clap-svg">
               <!-- Clap top part (moving) -->
               <g class="clap-top">
-                <rect x="10" y="0" width="80" height="15" rx="2" fill="#c41e3a"/>
+                <rect x="10" y="0" width="80" height="15" rx="2" fill="#B91C1C"/>
                 <line x1="20" y1="3" x2="20" y2="12" stroke="#fff" stroke-width="2"/>
                 <line x1="35" y1="3" x2="35" y2="12" stroke="#fff" stroke-width="2"/>
                 <line x1="50" y1="3" x2="50" y2="12" stroke="#fff" stroke-width="2"/>
@@ -3490,7 +3527,7 @@
                 <line x1="80" y1="3" x2="80" y2="12" stroke="#fff" stroke-width="2"/>
               </g>
               <!-- Clap bottom part -->
-              <rect x="10" y="18" width="80" height="55" rx="3" fill="#1a1a1a" stroke="#c41e3a" stroke-width="2"/>
+              <rect x="10" y="18" width="80" height="55" rx="3" fill="#1a1a1a" stroke="#B91C1C" stroke-width="2"/>
               <text x="50" y="52" text-anchor="middle" fill="#fff" font-size="14" font-family="Bebas Neue, sans-serif" letter-spacing="2">ACTION</text>
             </svg>
           </div>
@@ -3501,7 +3538,7 @@
         <!-- Error message -->
         <div class="form-error" id="formError">
           <h3>Oups !</h3>
-          <p>Écris-nous direct à <a href="mailto:courtoucreve@gmail.com" style="color: var(--red);">courtoucreve@gmail.com</a></p>
+          <p>Écris-nous direct à <a href="mailto:courtoucreve@gmail.com" style="color: var(--red-text);">courtoucreve@gmail.com</a></p>
           <button class="retry-btn" onclick="hideError()">Réessayer</button>
         </div>
       </div>
@@ -3536,7 +3573,7 @@
       <p class="footer-copy">© 2026 Court ou Crève. Tous droits réservés.</p>
     </footer>
 
-  </div>
+  </main>
 
   <script>
     // ===== HAPTIC FEEDBACK SYSTEM =====
